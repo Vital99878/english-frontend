@@ -1,25 +1,27 @@
-import Exercise from '../../services/omissionExercise';
-import { useRef, useState } from 'react';
-import { BehaviorSubject } from 'rxjs';
-import AutoCompleteInput from '../AutoCompleteInput';
+import { useRef, useState } from "react";
+import { BehaviorSubject } from "rxjs";
+import AutoCompleteInput from "../../AutoCompleteInput";
+import OmissionExercise from "../../../services/omissionExercise";
 
 type Props = {
   exercise: string;
 };
 
-export default function OmissionExercise(props: Props) {
-  const exercise = new Exercise(props.exercise);
+export default function Omission(props: Props) {
+  const exercise = new OmissionExercise(props.exercise);
   const solution = useRef<Array<string>>([]);
   const counter$ = new BehaviorSubject(0);
   const [isSolutionChecked, setIsSolutionChecked] = useState(false);
-  const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([]);
+  const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>(
+    [],
+  );
 
   function checkSolution() {
-    console.log('correct keys: ', exercise.keys)
-    if(exercise.keys.length !== solution.current.length) {
-      console.log('Введите все ответы')
+    console.log("correct keys: ", exercise.keys);
+    if (exercise.keys.length !== solution.current.length) {
+      console.log("Введите все ответы");
       // todo всплывашку
-      return
+      return;
     }
 
     setCorrectAnswerKeys(exercise.checkAnswer(solution.current));
@@ -29,7 +31,7 @@ export default function OmissionExercise(props: Props) {
   return (
     <div className="exercise my-4">
       {exercise.valueForUI.map((value, index) => {
-        if (value === '[key]') {
+        if (value === "[key]") {
           const Input = (
             <AutoCompleteInput
               key={index}
@@ -47,9 +49,8 @@ export default function OmissionExercise(props: Props) {
           return <span key={index}>{value}</span>;
         }
       })}
-      <button className={'absolute right-8 bottom-96'} onClick={checkSolution}>
-        {' '}
-        checkSolution
+      <button className={"absolute right-8 bottom-96"} onClick={checkSolution}>
+        Проверить
       </button>
     </div>
   );

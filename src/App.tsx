@@ -3,8 +3,8 @@ import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import OmissionExercise from "./components/OmissionExercise";
 import { exercise_with_omissions } from "./const/exercise_with_omissions";
+import OmissionExercise from "./components/features/OmissionExercise";
 
 const queryClient = new QueryClient({
   defaultOptions: {
