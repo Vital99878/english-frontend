@@ -12,7 +12,8 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
     [],
   );
 
-  function checkSolution() {
+  function checkSolution(evt: SubmitEvent) {
+    evt.preventDefault()
     // console.log("correct keys: ", exercise.keys);
     // console.log("solution: ", solution.current);
     if (exercise.keys.length !== solution.current.length) {
@@ -26,7 +27,7 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
   }
 
   return (
-    <div className="exercise my-4">
+    <form className="exercise my-4" onSubmit={checkSolution}>
       {exercise.valueForUI.map((value, index) => {
         if (value === "[key]") {
           const Input = (
@@ -49,6 +50,6 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
       <button className={"absolute right-8 bottom-96"} onClick={checkSolution}>
         Проверить
       </button>
-    </div>
+    </form>
   );
 }
