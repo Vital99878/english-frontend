@@ -9,7 +9,7 @@ type Props = {
   parts: string[];
 };
 
-function ListComponent({ parts }: Props) {
+export function RightOrderExerciseExecution({ parts }: Props) {
   const [items, setItems] = useState(parts);
 
   useEffect(() => {
@@ -85,4 +85,4 @@ function ListComponent({ parts }: Props) {
   );
 }
 
-export default ListComponent;
+export default RightOrderExerciseExecution;

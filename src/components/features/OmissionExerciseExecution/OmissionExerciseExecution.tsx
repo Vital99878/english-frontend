@@ -1,14 +1,10 @@
 import { useRef, useState } from "react";
 import { BehaviorSubject } from "rxjs";
 import AutoCompleteInput from "../../AutoCompleteInput";
-import OmissionExercise from "../../../services/omissionExercise";
+import OmissionExerciseService from "../../../services/omissionExerciseService";
 
-type Props = {
-  exercise: string;
-};
-
-export default function Omission(props: Props) {
-  const exercise = new OmissionExercise(props.exercise);
+export default function OmissionExerciseExecution(props: { exercise: string }) {
+  const exercise = new OmissionExerciseService(props.exercise);
   const solution = useRef<Array<string>>([]);
   const counter$ = new BehaviorSubject(0);
   const [isSolutionChecked, setIsSolutionChecked] = useState(false);
@@ -17,7 +13,8 @@ export default function Omission(props: Props) {
   );
 
   function checkSolution() {
-    console.log("correct keys: ", exercise.keys);
+    // console.log("correct keys: ", exercise.keys);
+    // console.log("solution: ", solution.current);
     if (exercise.keys.length !== solution.current.length) {
       console.log("Введите все ответы");
       // todo всплывашку

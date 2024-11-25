@@ -3,8 +3,12 @@ import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { exercise_with_omissions } from "./const/exercise_with_omissions";
-import OmissionExercise from "./components/features/OmissionExercise";
+import {
+  EXERCISE_WITH_OMISSIONS,
+  EXERCISE_RIGHT_ORDER,
+} from "./const/exercise_with_omissions";
+import OmissionExerciseExecution from "./components/features/OmissionExerciseExecution";
+import RightOrderExerciseExecution from "./components/features/RightOrderExerciseExecution";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +30,8 @@ function App() {
     >
       <div>
         <h1>Vite + React</h1>
-        <OmissionExercise exercise={exercise_with_omissions} />
+        <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />
+        <RightOrderExerciseExecution parts={EXERCISE_RIGHT_ORDER} />
       </div>
 
       <ReactQueryDevtools initialIsOpen />

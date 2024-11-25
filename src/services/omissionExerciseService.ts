@@ -1,4 +1,4 @@
-export default class OmissionExercise {
+export default class OmissionExerciseService {
   constructor(exercise: string) {
     this.createKeys(exercise);
     this.splitToUI(exercise);
