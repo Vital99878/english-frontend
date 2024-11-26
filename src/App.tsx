@@ -6,9 +6,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   EXERCISE_WITH_OMISSIONS,
   EXERCISE_RIGHT_ORDER,
-} from "./const/exercise_with_omissions";
-import OmissionExerciseExecution from "@features/OmissionExerciseExecution";
+} from "@const/exercise_with_omissions";
 import RightOrderExerciseExecution from "@features/RightOrderExerciseExecution/index";
+import OmissionExerciseExecution from "@features/OmissionExerciseExecution";
 
 const queryClient = new QueryClient({
   defaultOptions: {

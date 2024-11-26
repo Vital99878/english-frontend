@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { BehaviorSubject } from "rxjs";
+import OmissionExerciseService from "@services/omissionExerciseService";
 import AutoCompleteInput from "../../AutoCompleteInput";
-import OmissionExerciseService from "../../../services/omissionExerciseService";
 
 export default function OmissionExerciseExecution(props: { exercise: string }) {
   const exercise = new OmissionExerciseService(props.exercise);
@@ -13,7 +13,7 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
   );
 
   function checkSolution(evt: SubmitEvent) {
-    evt.preventDefault()
+    evt.preventDefault();
     // console.log("correct keys: ", exercise.keys);
     // console.log("solution: ", solution.current);
     if (exercise.keys.length !== solution.current.length) {
