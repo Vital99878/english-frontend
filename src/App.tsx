@@ -29,7 +29,7 @@ function App() {
       persistOptions={{ persister }}
     >
       <div>
-        <h1>Vite + React</h1>
+        <h1 className={'text-2xl'}>Vite + React</h1>
         <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />
         <RightOrderExerciseExecution parts={EXERCISE_RIGHT_ORDER} />
       </div>
