@@ -24,8 +24,9 @@
   "baseUrl": ".",
   "paths": {
     "@src*": ["src*"],
-    "components*": ["src/components*"],
-    "services*": ["src/services*"]
+    "@components*": ["src/components*"],
+    "@features*": ["src/components/features*"],
+    "@services*": ["src/services*"]
   },
   "include": ["src", "custom.d.ts", "./*.tsx"]
 }

@@ -7,8 +7,8 @@ import {
   EXERCISE_WITH_OMISSIONS,
   EXERCISE_RIGHT_ORDER,
 } from "./const/exercise_with_omissions";
-import OmissionExerciseExecution from "./components/features/OmissionExerciseExecution";
-import RightOrderExerciseExecution from "./components/features/RightOrderExerciseExecution";
+import OmissionExerciseExecution from "@features/OmissionExerciseExecution";
+import RightOrderExerciseExecution from "@features/RightOrderExerciseExecution/index";
 
 const queryClient = new QueryClient({
   defaultOptions: {
