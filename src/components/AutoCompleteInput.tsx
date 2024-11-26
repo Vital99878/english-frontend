@@ -41,7 +41,7 @@ export default function AutoCompleteText({
     span.textContent = inputValue || " "; // Обозначим пробел для учета ширины
 
     // Устанавливаем ширину инпута
-    setInputWidth(`${span.getBoundingClientRect().width || 12}px `); // Учитываем паддинг
+    setInputWidth(`${span.getBoundingClientRect().width || 12}px`); // Учитываем паддинг
 
     // Удаляем временный элемент
     document.body.removeChild(span);
