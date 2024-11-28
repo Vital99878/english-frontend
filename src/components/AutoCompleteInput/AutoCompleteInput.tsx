@@ -46,7 +46,7 @@ export default function AutoCompleteInput({
         type="text"
         value={inputValue}
         onChange={handleChange}
-        className={clsx("inputOmission", {
+        className={clsx("inputOmission bg-transparent", {
           correct: isSolutionChecked && correctAnswerKeys[keyPlace],
           incorrect: isSolutionChecked && !correctAnswerKeys[keyPlace],
         })}

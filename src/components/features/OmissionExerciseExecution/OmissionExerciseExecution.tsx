@@ -27,34 +27,33 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
   }
 
   return (
-      <div>
-        <h1>Title</h1>
-        <p>Description</p>
-        <form className="exercise my-4 py-4" onSubmit={checkSolution}>
-          {exercise.valueForUI.map((value, index) => {
-            if (value === "[key]") {
-              const Input = (
-                  <AutoCompleteInput
-                      key={index}
-                      options={exercise.keys}
-                      correctAnswerKeys={correctAnswerKeys}
-                      solutionData={{keyPlace: counter$.getValue(), solution}}
-                      isSolutionChecked={isSolutionChecked}
-                      setIsSolutionToFalse={() => setIsSolutionChecked(false)}
-                  />
-              );
+    <div className={"my-9 flex flex-col gap-5"}>
+      <h1 >Title</h1>
+      <p >Description</p>
+      <form className="exercise" onSubmit={checkSolution}>
+        {exercise.valueForUI.map((value, index) => {
+          if (value === "[key]") {
+            const Input = (
+              <AutoCompleteInput
+                key={index}
+                options={exercise.keys}
+                correctAnswerKeys={correctAnswerKeys}
+                solutionData={{ keyPlace: counter$.getValue(), solution }}
+                isSolutionChecked={isSolutionChecked}
+                setIsSolutionToFalse={() => setIsSolutionChecked(false)}
+              />
+            );
 
-              counter$.next(counter$.getValue() + 1);
-              return Input;
-            } else {
-              return <span key={index}>{value}</span>;
-            }
-          })}
-          <button className={"absolute right-8 bottom-14"} onClick={checkSolution}>
-            Проверить
-          </button>
-        </form>
-      </div>
-
+            counter$.next(counter$.getValue() + 1);
+            return Input;
+          } else {
+            return <span key={index}>{value}</span>;
+          }
+        })}
+      </form>
+      <button className={"ml-auto mt-3.5 p-2 border:none bg-transparent"} onClick={checkSolution}>
+        Проверить
+      </button>
+    </div>
   );
 }

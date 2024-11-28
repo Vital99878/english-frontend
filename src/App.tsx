@@ -28,10 +28,8 @@ function App() {
       client={queryClient}
       persistOptions={{ persister }}
     >
-      <div>
-        <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />
-        {/*<RightOrderExerciseExecution parts={EXERCISE_RIGHT_ORDER} />*/}
-      </div>
+      <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />
+      {/*<RightOrderExerciseExecution parts={EXERCISE_RIGHT_ORDER} />*/}
 
       <ReactQueryDevtools initialIsOpen />
     </PersistQueryClientProvider>
