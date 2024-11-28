@@ -29,9 +29,8 @@ function App() {
       persistOptions={{ persister }}
     >
       <div>
-        <h1 className={'text-3xl font-bold underline'}>Vite + React</h1>
         <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />
-        <RightOrderExerciseExecution parts={EXERCISE_RIGHT_ORDER} />
+        {/*<RightOrderExerciseExecution parts={EXERCISE_RIGHT_ORDER} />*/}
       </div>
 
       <ReactQueryDevtools initialIsOpen />

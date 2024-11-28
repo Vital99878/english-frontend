@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { BehaviorSubject } from "rxjs";
 import OmissionExerciseService from "@services/omissionExerciseService";
-import AutoCompleteInput from "../../AutoCompleteInput";
+import AutoCompleteInput from "../../AutoCompleteInput/AutoCompleteInput";
 
 export default function OmissionExerciseExecution(props: { exercise: string }) {
   const exercise = new OmissionExerciseService(props.exercise);
@@ -27,29 +27,34 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
   }
 
   return (
-    <form className="exercise my-4 py-4" onSubmit={checkSolution}>
-      {exercise.valueForUI.map((value, index) => {
-        if (value === "[key]") {
-          const Input = (
-            <AutoCompleteInput
-              key={index}
-              options={exercise.keys}
-              correctAnswerKeys={correctAnswerKeys}
-              solutionData={{ keyPlace: counter$.getValue(), solution }}
-              isSolutionChecked={isSolutionChecked}
-              setIsSolutionToFalse={() => setIsSolutionChecked(false)}
-            />
-          );
+      <div>
+        <h1>Title</h1>
+        <p>Description</p>
+        <form className="exercise my-4 py-4" onSubmit={checkSolution}>
+          {exercise.valueForUI.map((value, index) => {
+            if (value === "[key]") {
+              const Input = (
+                  <AutoCompleteInput
+                      key={index}
+                      options={exercise.keys}
+                      correctAnswerKeys={correctAnswerKeys}
+                      solutionData={{keyPlace: counter$.getValue(), solution}}
+                      isSolutionChecked={isSolutionChecked}
+                      setIsSolutionToFalse={() => setIsSolutionChecked(false)}
+                  />
+              );
 
-          counter$.next(counter$.getValue() + 1);
-          return Input;
-        } else {
-          return <span key={index}>{value}</span>;
-        }
-      })}
-      <button className={"absolute right-8 bottom-14"} onClick={checkSolution}>
-        Проверить
-      </button>
-    </form>
+              counter$.next(counter$.getValue() + 1);
+              return Input;
+            } else {
+              return <span key={index}>{value}</span>;
+            }
+          })}
+          <button className={"absolute right-8 bottom-14"} onClick={checkSolution}>
+            Проверить
+          </button>
+        </form>
+      </div>
+
   );
 }
