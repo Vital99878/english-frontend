@@ -11,6 +11,7 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
   const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>(
     [],
   );
+  // const [focuseFound, setFocuseFound] = useState<boolean>(false);
 
   function checkSolution(evt: SubmitEvent) {
     evt.preventDefault();
@@ -24,6 +25,13 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
 
     setCorrectAnswerKeys(exercise.checkAnswer(solution.current));
     setIsSolutionChecked(true);
+      setFocusOnFirstIncorrectInput()
+  }
+
+  function setFocusOnFirstIncorrectInput() {
+      const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('.incorrect')
+      inputs[0].focus()
+
   }
 
   return (
@@ -42,7 +50,7 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
                   solutionData={{ keyPlace: counter$.getValue(), solution }}
                   isSolutionChecked={isSolutionChecked}
                   setIsSolutionToFalse={() => setIsSolutionChecked(false)}
-                  inputProps={{ onSubmit: checkSolution }}
+                  inputProps={{ onSubmit: checkSolution, autoFocus: true}}
                 />
               );
 
@@ -54,6 +62,7 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
           })}
         </div>
         <button
+          tabIndex={2}
           className={"ml-auto mt-3.5 p-2 border:none bg-transparent"}
           onClick={() => checkSolution}
         >

@@ -38,8 +38,11 @@ export default function AutoCompleteInput({
     const value = event.target.value;
     setInputValue(value);
     solution.current[keyPlace] = value;
-    setIsSolutionToFalse();
+    // setIsSolutionToFalse();
   };
+
+  const isCorrect = isSolutionChecked && correctAnswerKeys[keyPlace];
+  const isInCorrect = isSolutionChecked && !correctAnswerKeys[keyPlace];
 
   return (
     <>
@@ -47,7 +50,6 @@ export default function AutoCompleteInput({
       <input
         {...inputProps}
         ref={inputRef}
-        autoFocus={true}
         style={{
           width: !inputValue ? "2rem" : width,
           paddingInline: "6px",
@@ -56,10 +58,11 @@ export default function AutoCompleteInput({
         value={inputValue}
         onChange={handleChange}
         className={clsx("inputOmission bg-transparent", {
-          correct: isSolutionChecked && correctAnswerKeys[keyPlace],
-          incorrect: isSolutionChecked && !correctAnswerKeys[keyPlace],
+          correct: isCorrect,
+          incorrect: isInCorrect,
         })}
         placeholder="..."
+        tabIndex={isInCorrect ? 2 : 1}
       />
       {space.hasSpaceAfter && <span> </span>}
     </>

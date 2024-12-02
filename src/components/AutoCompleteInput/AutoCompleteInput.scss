@@ -9,8 +9,13 @@
 }
 
 .incorrect {
-  border-bottom: 2px red solid;
+  border-bottom: 1px rgba(219, 84, 84, 0.61) solid;
 }
+.incorrect:focus {
+  border: none;
+  outline: 1px rgba(255, 0, 0, 0.36) dashed;
+}
+
 
 .inputOmission:focus {
   border: 1px tomato solid;
