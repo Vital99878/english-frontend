@@ -1,4 +1,10 @@
-import { useState, ChangeEvent, useRef, MutableRefObject } from "react";
+import {
+  useState,
+  ChangeEvent,
+  useRef,
+  MutableRefObject,
+  ComponentProps,
+} from "react";
 import useCalcWidthAndSpace from "@components/AutoCompleteInput/useCalcWidthAndSpace";
 import clsx from "clsx";
 import "./AutoCompleteInput.scss";
@@ -8,6 +14,7 @@ type Props = {
   correctAnswerKeys: boolean[];
   isSolutionChecked: boolean;
   setIsSolutionToFalse: () => void;
+  inputProps: ComponentProps<"input">;
   solutionData: {
     keyPlace: number;
     solution: MutableRefObject<Array<string>>;
@@ -18,6 +25,7 @@ export default function AutoCompleteInput({
   isSolutionChecked,
   setIsSolutionToFalse,
   correctAnswerKeys,
+  inputProps,
   solutionData: { solution, keyPlace },
 }: Props) {
   const [inputValue, setInputValue] = useState<string>("");
@@ -37,6 +45,7 @@ export default function AutoCompleteInput({
     <>
       {space.hasSpaceBefore && <span> </span>}
       <input
+        {...inputProps}
         ref={inputRef}
         autoFocus={true}
         style={{
