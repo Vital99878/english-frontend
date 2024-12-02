@@ -2,6 +2,7 @@
   position: relative;
   border: 1px lightgrey solid;
   border-radius: 4px;
+  padding: 0;
   //border-bottom: 2px darkgrey solid;
 }
 .correct {
@@ -19,7 +20,6 @@
 
 .inputOmission:focus {
   border: 1px tomato solid;
-  //border-bottom: 2px darkgrey solid;
 }
 .hasSpanBefore {
   background-color: rgba(116, 123, 255, 0.44);

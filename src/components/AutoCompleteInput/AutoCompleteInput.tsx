@@ -8,6 +8,8 @@ import {
 import useCalcWidthAndSpace from "@components/AutoCompleteInput/useCalcWidthAndSpace";
 import clsx from "clsx";
 import "./AutoCompleteInput.scss";
+import { StyledInput } from "@components/shared/Input/Input";
+import styled from "styled-components";
 
 type Props = {
   options: string[];
@@ -20,6 +22,12 @@ type Props = {
     solution: MutableRefObject<Array<string>>;
   };
 };
+
+const Input = styled(StyledInput)({
+  padding: 0,
+  border: "none",
+  borderBottom: '2px',
+});
 
 export default function AutoCompleteInput({
   isSolutionChecked,
@@ -47,13 +55,12 @@ export default function AutoCompleteInput({
   return (
     <>
       {space.hasSpaceBefore && <span> </span>}
-      <input
+      <Input
         {...inputProps}
         ref={inputRef}
         style={{
           width: !inputValue ? "2rem" : width,
-          paddingInline: "6px",
-          fontFamily: 'Poppins'
+          fontFamily: "Poppins",
         }}
         type="text"
         value={inputValue}
