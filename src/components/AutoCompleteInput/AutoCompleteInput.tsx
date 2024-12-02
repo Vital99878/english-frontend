@@ -53,6 +53,7 @@ export default function AutoCompleteInput({
         style={{
           width: !inputValue ? "2rem" : width,
           paddingInline: "6px",
+          fontFamily: 'Poppins'
         }}
         type="text"
         value={inputValue}

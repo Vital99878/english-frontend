@@ -32,6 +32,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #e1caaf;
+
+  font-family: "Roboto", sans-serif;
 }
 
 h1 {
