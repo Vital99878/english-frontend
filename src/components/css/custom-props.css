@@ -1,0 +1,20 @@
+:root {
+  /* Основные цвета */
+  --background-color: #121212; /* Фон */
+  --text-color: #e0e0e0; /* Основной текст */
+  --secondary-text-color: #b3b3b3; /* Второстепенный текст */
+  --border-color: #333333; /* Цвет границ */
+  --placeholder-color: #757575; /* Цвет placeholder в input */
+
+  /* Акцентные цвета */
+  --primary-color: #bb86fc; /* Главный акцент */
+  --primary-hover-color: #9c6ffa; /* Hover-эффект акцента */
+  --success-color: #03dac6; /* Успех (зеленый акцент) */
+  --error-color: #cf6679; /* Ошибка/Ошибка (красный акцент) */
+
+  /* Тени и прочее */
+  --box-shadow-color: rgba(0, 0, 0, 0.5); /* Тени */
+  --input-bg-color: #1f1f1f; /* Фон для input, textarea */
+  --card-bg-color: #1e1e1e; /* Фон карточек, элементов */
+  --overlay-color: rgba(0, 0, 0, 0.7); /* Прозрачность оверлея */
+}
