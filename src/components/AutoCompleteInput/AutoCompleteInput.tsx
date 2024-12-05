@@ -58,7 +58,7 @@ export default function AutoCompleteInput({
         type="text"
         value={inputValue}
         onChange={handleChange}
-        className={clsx("inputOmission  text-n-5")}
+        className={clsx("text-n-5")}
         placeholder="..."
         tabIndex={isInCorrect ? 2 : 1}
       />

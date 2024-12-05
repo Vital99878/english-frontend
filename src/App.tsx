@@ -24,6 +24,7 @@ function App() {
       client={queryClient}
       persistOptions={{ persister }}
     >
+
       <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />
       {/*<RightOrderExerciseExecution parts={EXERCISE_RIGHT_ORDER} />*/}
 
