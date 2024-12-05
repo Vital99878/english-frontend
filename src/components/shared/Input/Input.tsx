@@ -10,15 +10,14 @@ export const StyledInput = styled.input`
 
     /* Состояние hover */
 
-    &:hover {
-        border-color: #b32121;
-    }
+    //&:hover {
+    //    border-color: #b32121;
+    //}
 
     /* Состояние focus */
 
     &:focus {
         border-color: #4A90E2;
-        box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
     }
 
     /* Состояние disabled */
@@ -41,9 +40,9 @@ export const StyledInput = styled.input`
 
     /* Состояние valid */
 
-    &:valid {
-        border-color: #28a745;
-    }
+    //&:valid {
+    //    border-color: #28a745;
+    //}
 
     /* Состояние invalid */
 

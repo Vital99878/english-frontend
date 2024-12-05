@@ -3,11 +3,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import {
-  EXERCISE_WITH_OMISSIONS,
-  EXERCISE_RIGHT_ORDER,
-} from "@const/exercise_with_omissions";
-import RightOrderExerciseExecution from "@features/RightOrderExerciseExecution/index";
+import { EXERCISE_WITH_OMISSIONS } from "@const/exercise_with_omissions";
 import OmissionExerciseExecution from "@features/OmissionExerciseExecution";
 
 const queryClient = new QueryClient({

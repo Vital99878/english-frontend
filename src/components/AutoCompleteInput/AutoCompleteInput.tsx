@@ -7,9 +7,7 @@ import {
 } from "react";
 import useCalcWidthAndSpace from "@components/AutoCompleteInput/useCalcWidthAndSpace";
 import clsx from "clsx";
-import "./AutoCompleteInput.scss";
-import { StyledInput } from "@components/shared/Input/Input";
-import styled from "styled-components";
+import { Input } from "./OmissionInput";
 
 type Props = {
   options: string[];
@@ -22,12 +20,6 @@ type Props = {
     solution: MutableRefObject<Array<string>>;
   };
 };
-
-const Input = styled(StyledInput)({
-  padding: 0,
-  border: "none",
-  borderBottom: '2px',
-});
 
 export default function AutoCompleteInput({
   isSolutionChecked,
@@ -56,19 +48,17 @@ export default function AutoCompleteInput({
     <>
       {space.hasSpaceBefore && <span> </span>}
       <Input
+        correct={isCorrect && isCorrect !== isInCorrect}
+        incorrect={isInCorrect && isCorrect !== isInCorrect}
         {...inputProps}
         ref={inputRef}
         style={{
           width: !inputValue ? "2rem" : width,
-          fontFamily: "Poppins",
         }}
         type="text"
         value={inputValue}
         onChange={handleChange}
-        className={clsx("inputOmission bg-transparent", {
-          correct: isCorrect,
-          incorrect: isInCorrect,
-        })}
+        className={clsx("inputOmission  text-n-5")}
         placeholder="..."
         tabIndex={isInCorrect ? 2 : 1}
       />

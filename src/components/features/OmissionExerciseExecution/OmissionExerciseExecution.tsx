@@ -11,12 +11,10 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
   const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>(
     [],
   );
-  // const [focuseFound, setFocuseFound] = useState<boolean>(false);
 
   function checkSolution(evt: SubmitEvent) {
     evt.preventDefault();
-    // console.log("correct keys: ", exercise.keys);
-    // console.log("solution: ", solution.current);
+
     if (exercise.keys.length !== solution.current.length) {
       console.log("Введите все ответы");
       // todo всплывашку
