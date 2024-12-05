@@ -23,7 +23,6 @@ type Props = {
 
 export default function AutoCompleteInput({
   isSolutionChecked,
-  setIsSolutionToFalse,
   correctAnswerKeys,
   inputProps,
   solutionData: { solution, keyPlace },
@@ -38,7 +37,6 @@ export default function AutoCompleteInput({
     const value = event.target.value;
     setInputValue(value);
     solution.current[keyPlace] = value;
-    // setIsSolutionToFalse();
   };
 
   const isCorrect = isSolutionChecked && correctAnswerKeys[keyPlace];
@@ -58,7 +56,7 @@ export default function AutoCompleteInput({
         type="text"
         value={inputValue}
         onChange={handleChange}
-        className={clsx("text-n-5")}
+        className={clsx("text-n-5", isInCorrect && 'isInCorrect')}
         placeholder="..."
         tabIndex={isInCorrect ? 2 : 1}
       />

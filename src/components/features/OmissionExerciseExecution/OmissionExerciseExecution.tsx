@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { BehaviorSubject } from "rxjs";
 import OmissionExerciseService from "@services/omissionExerciseService";
 import AutoCompleteInput from "../../AutoCompleteInput/AutoCompleteInput";
@@ -24,18 +24,16 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
 
     setCorrectAnswerKeys(exercise.checkAnswer(solution.current));
     setIsSolutionChecked(true);
-    setFocusOnFirstIncorrectInput();
-  }
-
-  function setFocusOnFirstIncorrectInput() {
-    const inputs: NodeListOf<HTMLInputElement> =
-      document.querySelectorAll(".incorrect");
-    inputs[0].focus();
+    const input = document.querySelector<HTMLInputElement>('.isInCorrect')
+    if(input) {
+      input.focus()
+      input.select()
+    }
   }
 
   return (
     <Layout>
-      <div className={"my-9 flex flex-col gap-5"} style={{maxWidth: '80ch'}}>
+      <div className={"my-9 flex flex-col gap-5"} style={{ maxWidth: "80ch" }}>
         <h1>Title</h1>
         <p>Description</p>
         <form onSubmit={checkSolution}>

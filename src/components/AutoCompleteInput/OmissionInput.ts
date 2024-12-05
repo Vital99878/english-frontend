@@ -8,6 +8,7 @@ interface ButtonProps {
 
 export const Input = styled(StyledInput)<ButtonProps>`
   padding: 0;
+  height: 1.2em;
   border: none;
   border-bottom: 2px var(--clr-n-cool-grey-6) solid;
   background: none;
