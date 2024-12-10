@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useMemo} from "react";
 
 import Layout from "@components/Layout/index";
 import style from "./RightOrderExerciseExecution.module.scss";
@@ -20,30 +20,34 @@ import {
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableItem } from "@features/RightOrderExerciseExecution/components/SortableItem";
+import OrderExerciseService from "@services/orderExerciseService";
 
 type Props = {
-  parts: string[];
+  exercise: string;
 };
 
-export default function RightOrderExerciseExecution({ parts }: Props) {
+export default function OrderExerciseExecution({ exercise }: Props) {
 
-  const [items, setItems] = useState(parts);
-  useEffect(() => {
-    console.log("items: ", items);
-  }, [items]);
+  const orderExercise = useMemo(() => new OrderExerciseService(exercise), [exercise]);
+
+  const [parts, setParts] = useState(orderExercise.exercise);
 
   // @ts-ignore
   function handleDragEnd(event) {
     const { active, over } = event;
 
     if (active.id !== over?.id) {
-      setItems((items) => {
+      setParts((items) => {
         const oldIndex = items.indexOf(active.id);
         const newIndex = items.indexOf(over.id);
 
         return arrayMove(items, oldIndex, newIndex);
       });
     }
+  }
+
+  function checkSolution() {
+    console.log(orderExercise.checkSolution(parts));
   }
 
   const sensors = useSensors(
@@ -63,14 +67,25 @@ export default function RightOrderExerciseExecution({ parts }: Props) {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext items={items} strategy={horizontalListSortingStrategy}>
+        <SortableContext items={parts} strategy={horizontalListSortingStrategy}>
           <ul className={style.list}>
-            {items.map((id) => (
-              <SortableItem key={id} id={id} />
+            {parts.map((part, index) => (
+              <>
+                <SortableItem key={part} part={part} />
+                {/*todo Пробелы*/}
+                {index !== parts.length - 1 ? " " : null}
+              </>
             ))}
           </ul>
         </SortableContext>
       </DndContext>
+      <button
+        tabIndex={2}
+        className={"ml-auto mt-3.5 p-2 border:none bg-transparent"}
+        onClick={checkSolution}
+      >
+        Проверить
+      </button>
     </Layout>
   );
 }
