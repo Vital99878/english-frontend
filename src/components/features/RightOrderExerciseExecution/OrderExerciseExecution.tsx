@@ -1,4 +1,4 @@
-import {useState, useMemo} from "react";
+import { useState, useMemo } from "react";
 
 import Layout from "@components/Layout/index";
 import style from "./RightOrderExerciseExecution.module.scss";
@@ -27,8 +27,10 @@ type Props = {
 };
 
 export default function OrderExerciseExecution({ exercise }: Props) {
-
-  const orderExercise = useMemo(() => new OrderExerciseService(exercise), [exercise]);
+  const orderExercise = useMemo(
+    () => new OrderExerciseService(exercise),
+    [exercise],
+  );
 
   const [parts, setParts] = useState(orderExercise.exercise);
 
