@@ -16,8 +16,8 @@ export function SortableItem(props: {part: string}) {
     };
 
     return (
-        <li ref={setNodeRef} style={style} {...attributes} {...listeners} className={'hover:bg-n-9'}>
+        <span ref={setNodeRef} style={style} {...attributes} {...listeners} className={'rounded hover:bg-n-9'}>
             {props.part}
-        </li>
+        </span>
     );
 }

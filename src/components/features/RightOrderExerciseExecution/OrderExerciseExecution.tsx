@@ -70,15 +70,11 @@ export default function OrderExerciseExecution({ exercise }: Props) {
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={parts} strategy={horizontalListSortingStrategy}>
-          <ul className={style.list}>
-            {parts.map((part, index) => (
-              <>
-                <SortableItem key={part} part={part} />
-                {/*todo Пробелы*/}
-                {index !== parts.length - 1 ? " " : null}
-              </>
+          <p className={style.sentence}>
+            {parts.map((part) => (
+              <SortableItem key={part} part={part} />
             ))}
-          </ul>
+          </p>
         </SortableContext>
       </DndContext>
       <button
