@@ -8,7 +8,7 @@ export default class OrderExerciseService implements OrderExercise {
         this.createKeys(exercise)
     }
 
-    public checkSolution(answers: string[]) {
+    public checkSolution(answers: string[]): boolean {
         return answers.toString() === this.keys.toString()
     }
 
@@ -24,6 +24,7 @@ export default class OrderExerciseService implements OrderExercise {
      * Возвращает куски предложения в хаотичном порядке
      */
     get exercise(): string[] {
+        // todo array в результате не должен быть равен this.keys
         const array: string[] = [...this.keys]
         for (let i = array.length - 1; i > 0; i--) {
             const randomIndex = Math.floor(Math.random() * (i + 1))

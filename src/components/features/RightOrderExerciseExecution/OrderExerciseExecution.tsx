@@ -1,11 +1,19 @@
-import { useState, useMemo } from 'react'
+import {useState, useMemo} from 'react'
 import Layout from '@components/Layout/index'
 import style from './RightOrderExerciseExecution.module.scss'
 // prettier-ignore
-import { DndContext, closestCenter, useSensors, useSensor, PointerSensor, KeyboardSensor, TouchSensor } from '@dnd-kit/core'
+import {
+    DndContext,
+    closestCenter,
+    useSensors,
+    useSensor,
+    PointerSensor,
+    KeyboardSensor,
+    TouchSensor
+} from '@dnd-kit/core'
 // prettier-ignore
-import { SortableContext, arrayMove, sortableKeyboardCoordinates, horizontalListSortingStrategy } from '@dnd-kit/sortable'
-import { SortableItem } from '@features/RightOrderExerciseExecution/components/SortableItem'
+import {SortableContext, arrayMove, sortableKeyboardCoordinates, horizontalListSortingStrategy} from '@dnd-kit/sortable'
+import {SortableItem} from '@features/RightOrderExerciseExecution/components/SortableItem'
 import OrderExerciseService from '@services/orderExerciseService'
 
 type Props = {
@@ -15,14 +23,14 @@ type Props = {
 export default function OrderExerciseExecution({ exercise }: Props) {
     const orderExercise = useMemo(() => new OrderExerciseService(exercise), [exercise])
 
-    const [parts, setParts] = useState(orderExercise.exercise)
+    const [solution, setSolution] = useState(orderExercise.exercise)
 
     // @ts-ignore
     function handleDragEnd(event) {
         const { active, over } = event
 
         if (active.id !== over?.id) {
-            setParts((items) => {
+            setSolution((items) => {
                 const oldIndex = items.indexOf(active.id)
                 const newIndex = items.indexOf(over.id)
 
@@ -32,7 +40,7 @@ export default function OrderExerciseExecution({ exercise }: Props) {
     }
 
     function checkSolution() {
-        console.log(orderExercise.checkSolution(parts))
+        console.log(orderExercise.checkSolution(solution))
     }
 
     const sensors = useSensors(
@@ -48,9 +56,9 @@ export default function OrderExerciseExecution({ exercise }: Props) {
             <h1>Упражение номер 1</h1>
             <p>Составьте предложение</p>
             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                <SortableContext items={parts} strategy={horizontalListSortingStrategy}>
+                <SortableContext items={solution} strategy={horizontalListSortingStrategy}>
                     <p className={style.sentence}>
-                        {parts.map((part) => (
+                        {solution.map((part) => (
                             <SortableItem key={part} part={part} />
                         ))}
                     </p>
