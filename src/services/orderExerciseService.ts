@@ -3,8 +3,10 @@ import { OrderExercise } from '@models/orderExercise'
 export default class OrderExerciseService implements OrderExercise {
     keys: string[] = []
     solution: string[] = []
+    endSign = '.'
 
     constructor(exercise: string) {
+        this.endSign = exercise[exercise.length - 1] // todo Проверка при создании и сохранение в бд, что Знак заверешения
         this.createKeys(exercise)
     }
 

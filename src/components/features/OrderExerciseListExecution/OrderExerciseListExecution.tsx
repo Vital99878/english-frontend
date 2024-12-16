@@ -2,9 +2,17 @@ import { useState, useMemo } from 'react'
 import Layout from '@components/Layout/index'
 import style from './OrderExerciseListExecution.module.scss'
 // prettier-ignore
-import { DndContext, closestCenter, useSensors, useSensor, PointerSensor, KeyboardSensor, TouchSensor } from '@dnd-kit/core'
+import {
+    DndContext,
+    closestCenter,
+    useSensors,
+    useSensor,
+    PointerSensor,
+    KeyboardSensor,
+    TouchSensor
+} from '@dnd-kit/core'
 // prettier-ignore
-import { SortableContext, arrayMove, sortableKeyboardCoordinates, horizontalListSortingStrategy } from '@dnd-kit/sortable'
+import {SortableContext, arrayMove, sortableKeyboardCoordinates, horizontalListSortingStrategy} from '@dnd-kit/sortable'
 import { SortableItem } from '@features/RightOrderExerciseExecution/components/SortableItem'
 import OrderExerciseService from '@services/orderExerciseService'
 
@@ -23,6 +31,13 @@ export default function OrderExerciseListExecution({ exercises }: { exercises: s
             acc[currentIndex] = exerciseServiceList[currentIndex].exercise
             return acc
         }, [] as string[][])
+    })
+
+    const [endSignMap] = useState<Array<string>>(() => {
+        return exercises.reduce((acc, _ex, currentIndex) => {
+            acc[currentIndex] = exerciseServiceList[currentIndex].endSign
+            return acc
+        }, [] as string[])
     })
 
     function createHandlerDragEnd(index: number) {
@@ -62,22 +77,25 @@ export default function OrderExerciseListExecution({ exercises }: { exercises: s
             <p className={'mb-5 text-n-6'}>Составьте предложиения в правильном порядке</p>
             {solutionMap.map((s, index) => {
                 return (
-                    <DndContext
-                        sensors={sensors}
-                        collisionDetection={closestCenter}
-                        onDragEnd={createHandlerDragEnd(index)}
-                    >
-                        <SortableContext items={s} strategy={horizontalListSortingStrategy}>
-                            <p
-                                className={`${style.sentence} ${!checkedSolution ? '' : checkedSolution[index] ? style.correct : style.incorrect} mb-2`}
-                            >
-                                <span className={'text-n-6'}>{`${++index}) `}</span>
-                                {s.map((part) => (
-                                    <SortableItem key={part} part={part} />
-                                ))}
-                            </p>
-                        </SortableContext>
-                    </DndContext>
+                    <>
+                        <DndContext
+                            sensors={sensors}
+                            collisionDetection={closestCenter}
+                            onDragEnd={createHandlerDragEnd(index)}
+                        >
+                            <SortableContext items={s} strategy={horizontalListSortingStrategy}>
+                                <p
+                                    className={`${style.sentence} ${!checkedSolution ? '' : checkedSolution[index] ? style.correct : style.incorrect} mb-2 text-n-6`}
+                                >
+                                    <span>{`${index + 1}) `}</span>
+                                    {s.map((part, currentIndex) => (
+                                        <SortableItem key={part} part={part} capitalized={currentIndex === 0} />
+                                    ))}
+                                    <span>{endSignMap[index]}</span>
+                                </p>
+                            </SortableContext>
+                        </DndContext>
+                    </>
                 )
             })}
 

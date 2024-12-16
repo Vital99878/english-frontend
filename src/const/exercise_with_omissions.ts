@@ -4,7 +4,7 @@ export const EXERCISE_WITH_OMISSIONS =
 export const EXERCISE_RIGHT_ORDER = '[1-some text] [2-with new]  [3-order list]'
 
 export const EXERCISE_RIGHT_ORDER_LIST = [
-    '[some text 1] [with new 2]  [order list]',
-    '[some text 1] [with new 2]  [order list]',
-    '[some text 1] [with new 2]  [order list]',
+    '[some text 1] [with new 2]  [order list].',
+    '[some text 1] [with new 2]  [order list]?',
+    '[some text 1] [with new 2]  [order list].',
 ]
