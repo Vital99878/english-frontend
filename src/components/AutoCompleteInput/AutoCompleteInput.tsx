@@ -51,7 +51,7 @@ export default function AutoCompleteInput({
         {...inputProps}
         ref={inputRef}
         style={{
-          width: !inputValue ? "2rem" : width,
+          width: !inputValue ? "1.2rem" : width,
         }}
         type="text"
         value={inputValue}

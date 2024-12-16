@@ -5,7 +5,13 @@ import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persist
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import OrderExerciseListExecution from "@features/OrderExerciseListExecution";
 import OrderExerciseExecution from "@features/RightOrderExerciseExecution";
-import {EXERCISE_RIGHT_ORDER, EXERCISE_RIGHT_ORDER_LIST} from "@const/exercise_with_omissions";
+import {
+  EXERCISE_RIGHT_ORDER,
+  EXERCISE_RIGHT_ORDER_LIST,
+  EXERCISE_WITH_OMISSIONS,
+  EXERCISE_WITH_OMISSIONS_2
+} from "@const/exercise_with_omissions";
+import OmissionExerciseExecution from "./components/features/OmissionExerciseExecution";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,8 +32,9 @@ function App() {
       persistOptions={{ persister }}
     >
       {/*<OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />*/}
+      <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS_2} />
       {/*<OrderExerciseExecution exercise={EXERCISE_RIGHT_ORDER} />*/}
-    <OrderExerciseListExecution exercises={EXERCISE_RIGHT_ORDER_LIST}/>
+    {/*<OrderExerciseListExecution exercises={EXERCISE_RIGHT_ORDER_LIST}/>*/}
       <ReactQueryDevtools initialIsOpen />
     </PersistQueryClientProvider>
   );
