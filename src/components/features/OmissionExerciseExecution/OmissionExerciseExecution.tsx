@@ -35,7 +35,7 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
                 <h1>Title</h1>
                 <p>Description</p>
                 <form onSubmit={checkSolution}>
-                    <div className={'exercise'}>
+                    <p className={'exercise text-n-6'}>
                         {exercise.valueForUI.map((value, index) => {
                             if (value === '[key]') {
                                 const Input = (
@@ -56,10 +56,10 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
                                 return <span key={index}>{value}</span>
                             }
                         })}
-                    </div>
+                    </p>
                     <button
                         tabIndex={2}
-                        className={'ml-auto mt-3.5 p-2 border:none bg-transparent'}
+                        className={'ml-auto mt-3.5 p-2 border:none bg-transparent text-n-6'}
                         onClick={() => checkSolution}
                     >
                         Проверить
