@@ -19,3 +19,7 @@
     color: red;
     transition: color ease-in-out;
 }
+
+.sentence > *:last-child {
+    margin-left: -0.4em;
+}
