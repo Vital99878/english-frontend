@@ -1,15 +1,25 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
 import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
 import Layout from '@components/Layout/index'
+import { useQuery } from '@tanstack/react-query'
+import api from '@services/apiService'
 
 export default function OmissionExerciseExecution(props: { exercise: string }) {
-    const exercise = new OmissionExerciseService(props.exercise)
+    const { data: exerciseData, isFetching } = useQuery({ queryKey: ['article'], queryFn: () => api.getExercise('2') })
+    const [exercise, setExercise] = useState(new OmissionExerciseService(''))
     const solution = useRef<Array<string>>([])
     const counter$ = new BehaviorSubject(0)
     const [isSolutionChecked, setIsSolutionChecked] = useState(false)
     const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([])
+
+    useEffect(() => {
+        if (exerciseData?.text) {
+            console.log(exerciseData.text)
+            setExercise(new OmissionExerciseService(exerciseData?.text))
+        }
+    }, [exerciseData?.text])
 
     function checkSolution(evt: SubmitEvent) {
         evt.preventDefault()
@@ -27,6 +37,11 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
             input.focus()
             input.select()
         }
+    }
+
+
+    if (!exerciseData) {
+        return <div>{'no data'}</div>
     }
 
     return (
