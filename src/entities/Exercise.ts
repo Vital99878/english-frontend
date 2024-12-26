@@ -1,6 +1,6 @@
 export interface IExercise {
     id: number;
-    text: string;
+    data: string;
     hint: string;
     level: string;
     topic: string;

@@ -1,35 +1,27 @@
-/**
- * Тип, приходящий из БД
- */
-export type Exercise<TExerciseMode extends ExerciseMode> = {
-  id: number;
-  title: string;
-  description: string;
-  level: Level; // Уровень сложности
-  grammarRule: GrammarRule; // Связанное правило грамматики
-  mode: ExerciseMode; // Способ выполнения упражнения
-  /**
-   * Упражнение.
-   * Данные, которые используются для создания упражениея для вывода в UI.
-   * Зависит от ExerciseMode
-   */
-  value: ExerciseValue<TExerciseMode>;
-};
-
-export type ExerciseValue<TExerciseMode extends ExerciseMode> =
-  TExerciseMode extends "omissions" ? string : string[];
-
-export type Level = "a1" | "a2" | "b1" | "b2" | "c1" | "c2";
-
-type GrammarRule = {
-  ruleId: number; // Уникальный идентификатор правила
-  name: string; // Название грамматического правила, например, 'Present Simple Tense'
-  description: string; // Описание правила
-};
+import { CoreData } from '@models/coreData'
 
 /**
- * - omissions - вставить пропущенные слова
- * - right-order -  расставить слова в правильном порядке
- * - right-order-dialog - расставить предложения в правильном порядке
+ *  Упражения приходящий из БД
  */
-type ExerciseMode = "omissions" | "right-order" | "right-order-dialog";
+export interface Exercise<Type extends ExerciseType> extends CoreData {
+    title: string
+    /**
+     * Описание, как выполнять задание
+     */
+    task: string
+    hint: string
+    type: ExerciseType
+    data: ExerciseData<Type>
+}
+
+/**
+ * Упражнение.
+ * Данные, которые используются для создания упражениея для вывода в UI.
+ * Зависит от ExerciseMode
+ */
+type ExerciseData<TExerciseMode extends ExerciseType> = TExerciseMode extends 'omissions' ? string : string[]
+
+/**
+ * Способ выполнения упражнения
+ */
+type ExerciseType = 'omissions' | 'right-order' | 'right-order-dialog'

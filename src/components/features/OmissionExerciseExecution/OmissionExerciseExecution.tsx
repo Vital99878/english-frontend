@@ -7,7 +7,7 @@ import {useQuery} from '@tanstack/react-query'
 import api from '@services/apiService'
 
 export default function OmissionExerciseExecution(props: { exercise: string }) {
-    const { data, isFetching } = useQuery({ queryKey: [`article`], queryFn: () => api.getExercise('1') })
+    const { data, isFetching } = useQuery({ queryKey: [`article`], queryFn: () => api.getExercise('2') })
     const [exercise, setExercise] = useState(new OmissionExerciseService(''))
     const solution = useRef<Array<string>>([])
     const counter$ = new BehaviorSubject(0)
@@ -16,7 +16,7 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
 
     useEffect(() => {
         if (data?.data) {
-            setExercise(new OmissionExerciseService(data?.data.text))
+            setExercise(new OmissionExerciseService(data?.data.data))
         }
     }, [data])
 

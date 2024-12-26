@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
     },
 })
 
-const EmptyExercise: IExercise = { hint: '', id: 0, level: '', text: '', topic: '' }
+const EmptyExercise: IExercise = { hint: '', id: 0, level: '', data: '', topic: '' }
 
 class ApiService {
     async getExercise(id: string): Promise<AxiosResponse<IExercise>> {
