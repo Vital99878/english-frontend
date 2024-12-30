@@ -15,26 +15,27 @@ import {
 import {SortableContext, arrayMove, sortableKeyboardCoordinates, horizontalListSortingStrategy} from '@dnd-kit/sortable'
 import { SortableItem } from '@features/RightOrderExerciseExecution/components/SortableItem'
 import OrderExerciseService from '@services/orderExerciseService'
+import { IExercise } from '@models/IExercise'
 
-export default function OrderExerciseListExecution({ exercises }: { exercises: string[] }) {
+export default function OrderExerciseListExecution({ exercise }: { exercise: IExercise<'right-order'> }) {
     const exerciseServiceList: OrderExerciseService[] = useMemo(() => {
-        return exercises.reduce((acc, ex, currentIndex) => {
+        return exercise.data.reduce((acc, ex, currentIndex) => {
             acc[currentIndex] = new OrderExerciseService(ex)
             return acc
         }, [] as OrderExerciseService[])
-    }, [exercises])
+    }, [exercise])
 
     const [checkedSolution, setCheckedSolution] = useState<Array<boolean> | null>(null)
 
     const [solutionMap, setSolutionMap] = useState<Array<string>[]>(() => {
-        return exercises.reduce((acc, _ex, currentIndex) => {
+        return exercise.data.reduce((acc, _ex, currentIndex) => {
             acc[currentIndex] = exerciseServiceList[currentIndex].exercise
             return acc
         }, [] as string[][])
     })
 
     const [endSignMap] = useState<Array<string>>(() => {
-        return exercises.reduce((acc, _ex, currentIndex) => {
+        return exercise.data.reduce((acc, _ex, currentIndex) => {
             acc[currentIndex] = exerciseServiceList[currentIndex].endSign
             return acc
         }, [] as string[])

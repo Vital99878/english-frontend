@@ -1,9 +1,10 @@
 import { CoreData } from '@models/coreData'
+import {type} from "node:os";
 
 /**
  *  Упражения приходящий из БД
  */
-export interface Exercise<Type extends ExerciseType> extends CoreData {
+export interface IExercise<Type extends ExerciseType> extends CoreData {
     title: string
     /**
      * Описание, как выполнять задание
@@ -24,4 +25,6 @@ type ExerciseData<TExerciseMode extends ExerciseType> = TExerciseMode extends 'o
 /**
  * Способ выполнения упражнения
  */
-type ExerciseType = 'omissions' | 'right-order' | 'right-order-dialog'
+type ExerciseType = 'omissions' | 'right-order' | 'right-order-dialog';
+
+export type TExercise = IExercise<'omissions'> | IExercise<'right-order'>

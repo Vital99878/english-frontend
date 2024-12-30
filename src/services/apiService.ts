@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Exercise } from '@models/exercise'
+import { IExercise } from '@models/IExercise'
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:3000',
@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
     },
 })
 
-const EmptyExercise: Exercise<'omissions'> = {
+const EmptyExercise: IExercise<'omissions'> = {
     title: '',
     task: '',
     hint: '',
@@ -20,10 +20,9 @@ const EmptyExercise: Exercise<'omissions'> = {
 }
 
 class ApiService {
-    async getExercise(id: string): Promise<Exercise<'omissions'>> {
+    async getExercise(id: string): Promise<IExercise<'omissions'>> {
         try {
-            const res = await axiosInstance.get<Exercise<'omissions'>>(`/exercise/article/${id}`)
-            console.log('res: ', res)
+            const res = await axiosInstance.get<IExercise<'omissions'>>(`/exercise/article/${id}`)
             return res.data
         } catch (e) {
             console.error(e)

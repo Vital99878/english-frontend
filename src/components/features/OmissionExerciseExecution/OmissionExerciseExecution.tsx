@@ -2,10 +2,10 @@ import { useRef, useState } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
 import Layout from '@components/Layout/index'
-import { Exercise } from '@models/exercise'
+import { IExercise } from '@models/IExercise'
 import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
 
-export default function OmissionExerciseExecution(props: { exercise: Exercise<'omissions'> }) {
+export default function OmissionExerciseExecution(props: { exercise: IExercise<'omissions'> }) {
     const exerciseService = new OmissionExerciseService(props.exercise.data)
     const solution = useRef<Array<string>>([])
 
