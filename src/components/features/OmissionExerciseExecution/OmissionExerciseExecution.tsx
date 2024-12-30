@@ -1,45 +1,34 @@
-import {useRef, useState, useEffect} from 'react'
-import {BehaviorSubject} from 'rxjs'
+import { useRef, useState } from 'react'
+import { BehaviorSubject } from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
-import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
 import Layout from '@components/Layout/index'
-import {useQuery} from '@tanstack/react-query'
-import api from '@services/apiService'
+import { Exercise } from '@models/exercise'
+import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
 
-export default function OmissionExerciseExecution(props: { exercise: string }) {
-    const { data, isFetching } = useQuery({ queryKey: [`article`], queryFn: () => api.getExercise('2') })
-    const [exercise, setExercise] = useState(new OmissionExerciseService(''))
+export default function OmissionExerciseExecution(props: { exercise: Exercise<'omissions'> }) {
+    const exerciseService = new OmissionExerciseService(props.exercise.data)
     const solution = useRef<Array<string>>([])
+
     const counter$ = new BehaviorSubject(0)
     const [isSolutionChecked, setIsSolutionChecked] = useState(false)
     const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([])
 
-    useEffect(() => {
-        if (data?.data) {
-            setExercise(new OmissionExerciseService(data?.data.data))
-        }
-    }, [data])
-
     function checkSolution(evt: SubmitEvent) {
         evt.preventDefault()
 
-        if (exercise.keys.length !== solution.current.length) {
+        if (exerciseService.keys.length !== solution.current.length) {
             console.log('Введите все ответы')
             // todo всплывашку
             return
         }
 
-        setCorrectAnswerKeys(exercise.checkAnswer(solution.current))
+        setCorrectAnswerKeys(exerciseService.checkAnswer(solution.current))
         setIsSolutionChecked(true)
         const input = document.querySelector<HTMLInputElement>('.isInCorrect')
         if (input) {
             input.focus()
             input.select()
         }
-    }
-
-    if (!data) {
-        return <div>{'no data'}</div>
     }
 
     return (
@@ -49,12 +38,12 @@ export default function OmissionExerciseExecution(props: { exercise: string }) {
                 <p>Description</p>
                 <form onSubmit={checkSolution}>
                     <p className={'exercise text-n-6'}>
-                        {exercise.valueForUI.map((value, index) => {
+                        {exerciseService.valueForUI.map((value, index) => {
                             if (value === '[key]') {
                                 const Input = (
                                     <AutoCompleteInput
                                         key={index}
-                                        options={exercise.keys}
+                                        options={exerciseService.keys}
                                         correctAnswerKeys={correctAnswerKeys}
                                         solutionData={{ keyPlace: counter$.getValue(), solution }}
                                         isSolutionChecked={isSolutionChecked}

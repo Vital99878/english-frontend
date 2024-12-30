@@ -3,6 +3,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import OrderExerciseListExecution from "@features/OrderExerciseListExecution";
 import OrderExerciseExecution from "@features/RightOrderExerciseExecution";
 import {
@@ -11,7 +12,8 @@ import {
   EXERCISE_WITH_OMISSIONS,
   EXERCISE_WITH_OMISSIONS_2
 } from "@const/exercise_with_omissions";
-import OmissionExerciseExecution from "./components/features/OmissionExerciseExecution";
+import OmissionExerciseExecution from "@features/OmissionExerciseExecution";
+import ExercisePage from "@pages/ExercisePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,8 +33,12 @@ function App() {
       client={queryClient}
       persistOptions={{ persister }}
     >
+      <Router>
+        <Routes>
+          <Route path="/exercise/*" element={<ExercisePage />} />
+        </Routes>
+      </Router>
       {/*<OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />*/}
-      <OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS_2} />
       {/*<OrderExerciseExecution exercise={EXERCISE_RIGHT_ORDER} />*/}
     {/*<OrderExerciseListExecution exercises={EXERCISE_RIGHT_ORDER_LIST}/>*/}
       <ReactQueryDevtools initialIsOpen />
