@@ -73,7 +73,7 @@ export default function OrderExerciseListExecution({ exercise }: { exercise: IEx
     )
 
     return (
-        <Layout>
+        <div>
             <h1 className={'text-2xl text-n-6 my-9'}>Упражение номер Exercise List Execution</h1>
             <p className={'mb-5 text-n-6'}>Составьте предложиения в правильном порядке</p>
             {solutionMap.map((s, index) => {
@@ -107,6 +107,6 @@ export default function OrderExerciseListExecution({ exercise }: { exercise: IEx
             >
                 Проверить
             </button>
-        </Layout>
+        </div>
     )
 }
