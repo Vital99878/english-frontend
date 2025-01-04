@@ -1,15 +1,20 @@
-import {useRef, useState} from 'react'
-import {BehaviorSubject} from 'rxjs'
+import { useRef, useState } from 'react'
+import { BehaviorSubject } from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
-import {IExercise} from '@models/IExercise'
+import { IExercise } from '@models/IExercise'
 import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
+import IconButton from '@mui/material/IconButton';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import alertService from '@components/Layout/Messenger/alertService'
+import ExerciseHint from '@components/shared/ExerciseHint/ExerciseHint'
+import style from './OmissionExercise.module.scss'
 
 export default function OmissionExerciseExecution(props: { exercise: IExercise<'omissions'> }) {
     const exerciseService = new OmissionExerciseService(props.exercise.data)
     const solution = useRef<Array<string>>([])
 
     const counter$ = new BehaviorSubject(0)
+    const [hintIsOpened, setHintIsOpened] = useState(false)
     const [isSolutionChecked, setIsSolutionChecked] = useState(false)
     const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([])
 
@@ -20,7 +25,6 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
             alertService.showMessage({
                 msg: 'Введите все ответы',
                 severity: 'warning',
-
             })
             return
         }
@@ -35,7 +39,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     }
 
     return (
-        <div className={'my-9 flex flex-col gap-5'} style={{ maxWidth: '80ch' }}>
+        <div className={'my-9 flex flex-col gap-5 relative'} style={{ maxWidth: '80ch' }}>
             <h1>Title</h1>
             <p>Description</p>
             <form onSubmit={checkSolution}>
@@ -63,12 +67,16 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
                 </p>
                 <button
                     tabIndex={2}
-                    className={'ml-auto mt-3.5 p-2 border:none bg-transparent text-n-6'}
+                    className={'ml-auto mt-3.5 p-2 border:none bg-transparent text-n-6 w-full'}
                     onClick={() => checkSolution}
                 >
                     Проверить
                 </button>
             </form>
+            <ExerciseHint text={props.exercise.hint} open={hintIsOpened} handleClose={() => setHintIsOpened(false)} />
+            <IconButton onClick={() => setHintIsOpened((s) => !s)} className={style.openHintButton}>
+                <InfoOutlinedIcon style={{backgroundColor: 'lightblue', borderRadius: '8px'}}/>
+            </IconButton>
         </div>
     )
 }
