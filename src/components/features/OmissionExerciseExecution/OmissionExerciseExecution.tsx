@@ -12,7 +12,7 @@ import exerciseNavigator from '@services/exercise-navigator'
 
 export default function OmissionExerciseExecution(props: { exercise: IExercise<'omissions'> }) {
     const exerciseService = new OmissionExerciseService(props.exercise.data)
-    const solution = useRef<Array<string>>([])
+    const solution = useRef<Array<string | undefined>>([])
 
     const counter$ = new BehaviorSubject(0)
     const [hintIsOpened, setHintIsOpened] = useState(false)
@@ -22,7 +22,9 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     function checkSolution(evt: SubmitEvent) {
         evt.preventDefault()
 
-        if (exerciseService.keys.length !== solution.current.length) {
+        console.log('solution.current: ', solution.current)
+
+        if (exerciseService.keys.length !== solution.current.length || solution.current.includes(undefined)) {
             alertService.showMessage({
                 msg: 'Введите все ответы',
                 severity: 'warning',
@@ -30,7 +32,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
             return
         }
 
-        setCorrectAnswerKeys(exerciseService.checkAnswer(solution.current))
+        setCorrectAnswerKeys(exerciseService.checkAnswer(solution.current as Array<string>))
         setIsSolutionChecked(true)
         const input = document.querySelector<HTMLInputElement>('.isInCorrect')
         if (input) {
