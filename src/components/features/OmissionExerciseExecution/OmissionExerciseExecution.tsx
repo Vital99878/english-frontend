@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react'
+import {useRef, useState, useEffect} from 'react'
 import {BehaviorSubject} from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
 import {IExercise} from '@models/IExercise'
@@ -19,27 +19,37 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     const [isSolutionChecked, setIsSolutionChecked] = useState(false)
     const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([])
 
+    function findFirstEmptyInputAndSetFocus() {
+        const emptyInput = document.querySelector<HTMLInputElement>('input[value=""], input:not([value])')
+        if (emptyInput) {
+            emptyInput.focus()
+        }
+    }
+
     function checkSolution(evt: SubmitEvent) {
         evt.preventDefault()
-
-        console.log('solution.current: ', solution.current)
 
         if (exerciseService.keys.length !== solution.current.length || solution.current.includes(undefined)) {
             alertService.showMessage({
                 msg: 'Введите все ответы',
                 severity: 'warning',
             })
-            return
-        }
 
-        setCorrectAnswerKeys(exerciseService.checkAnswer(solution.current as Array<string>))
-        setIsSolutionChecked(true)
-        const input = document.querySelector<HTMLInputElement>('.isInCorrect')
-        if (input) {
-            input.focus()
-            input.select()
+            return findFirstEmptyInputAndSetFocus()
+        } else {
+            setCorrectAnswerKeys(exerciseService.checkAnswer(solution.current as Array<string>))
+            setIsSolutionChecked(true)
+            const input = document.querySelector<HTMLInputElement>('.isInCorrect')
+            if (input) {
+                input.focus()
+                input.select()
+            }
         }
     }
+
+    useEffect(() => {
+        findFirstEmptyInputAndSetFocus()
+    }, [])
 
     return (
         <div className={'my-9 flex flex-col gap-5 relative'} style={{ maxWidth: '80ch' }}>
@@ -59,7 +69,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
                                     solutionData={{ keyPlace: counter$.getValue(), solution }}
                                     isSolutionChecked={isSolutionChecked}
                                     setIsSolutionToFalse={() => setIsSolutionChecked(false)}
-                                    inputProps={{ onSubmit: checkSolution, autoFocus: true }}
+                                    inputProps={{ onSubmit: checkSolution }}
                                 />
                             )
 

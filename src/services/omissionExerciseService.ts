@@ -20,7 +20,6 @@ export default class OmissionExerciseService {
     // console.log('this.keys: ', this.keys)
     // console.log('solution: ', solution)
     const regex = /^\s*$/;
-    // return regex.test(str);
     return this.keys.reduce((acc, correctKey, currentIndex) => {
       acc[currentIndex] =
         (correctKey === ' ' && !solution[currentIndex]) ||
