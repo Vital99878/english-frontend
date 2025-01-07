@@ -1,5 +1,4 @@
 import { CoreData } from '@models/coreData'
-import {type} from "node:os";
 
 /**
  *  Упражения приходящий из БД
@@ -28,3 +27,24 @@ type ExerciseData<TExerciseMode extends ExerciseType> = TExerciseMode extends 'o
 type ExerciseType = 'omissions' | 'right-order' | 'right-order-dialog';
 
 export type TExercise = IExercise<'omissions'> | IExercise<'right-order'>
+
+
+/**
+ * - Навигатор для перехода к следующему и предыдущему упраженения
+ *  -
+ */
+export interface IExerciseNavigator {
+    currentExercise: number
+    firstExercise: number
+    lastExercise: number
+    /**
+     * - Перейти к следующему упражнению
+     * - Меняет текущий номер упражнения в URL
+     */
+    goToNext: () => void
+    /**
+     * - Перейти к предидущему упражнению
+     * - Меняет текущий номер упражнения в URL
+     */
+    goToPrevious: () => void
+}

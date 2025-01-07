@@ -1,13 +1,14 @@
-import { useRef, useState } from 'react'
-import { BehaviorSubject } from 'rxjs'
+import {useRef, useState} from 'react'
+import {BehaviorSubject} from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
-import { IExercise } from '@models/IExercise'
+import {IExercise} from '@models/IExercise'
 import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
-import IconButton from '@mui/material/IconButton';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import IconButton from '@mui/material/IconButton'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import alertService from '@components/Layout/Messenger/alertService'
 import ExerciseHint from '@components/shared/ExerciseHint/ExerciseHint'
 import style from './OmissionExercise.module.scss'
+import exerciseNavigator from '@services/exercise-navigator'
 
 export default function OmissionExerciseExecution(props: { exercise: IExercise<'omissions'> }) {
     const exerciseService = new OmissionExerciseService(props.exercise.data)
@@ -40,8 +41,10 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
 
     return (
         <div className={'my-9 flex flex-col gap-5 relative'} style={{ maxWidth: '80ch' }}>
-            <h1>Title</h1>
-            <p>Description</p>
+            <h1
+                className={'text-2xl'}
+            >{`${props.exercise.theme.toUpperCase()}. Упражнение N ${exerciseNavigator.currentExercise}`}</h1>
+            <p>{props.exercise.task}</p>
             <form onSubmit={checkSolution}>
                 <p className={'exercise text-n-6'}>
                     {exerciseService.valueForUI.map((value, index) => {
@@ -73,9 +76,25 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
                     Проверить
                 </button>
             </form>
+            <div className={'navigation flex justify-between'}>
+                <button
+                    className={'text-xs text-n-6'}
+                    onClick={exerciseNavigator.goToPrevious}
+                    disabled={exerciseNavigator.currentExercise === exerciseNavigator.firstExercise}
+                >
+                    Предыдущее
+                </button>
+                <button
+                    className={'text-xs text-n-6'}
+                    onClick={exerciseNavigator.goToNext}
+                    disabled={exerciseNavigator.currentExercise === exerciseNavigator.lastExercise}
+                >
+                    Следующее
+                </button>
+            </div>
             <ExerciseHint text={props.exercise.hint} open={hintIsOpened} handleClose={() => setHintIsOpened(false)} />
             <IconButton onClick={() => setHintIsOpened((s) => !s)} className={style.openHintButton}>
-                <InfoOutlinedIcon style={{backgroundColor: 'lightblue', borderRadius: '8px'}}/>
+                <InfoOutlinedIcon style={{ backgroundColor: 'lightblue', borderRadius: '8px' }} />
             </IconButton>
         </div>
     )
