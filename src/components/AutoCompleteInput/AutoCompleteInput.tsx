@@ -11,7 +11,7 @@ type Props = {
     inputProps: ComponentProps<'input'>
     solutionData: {
         keyPlace: number
-        solution: MutableRefObject<Array<string>>
+        solution: MutableRefObject<Array<string | undefined>>
     }
 }
 

@@ -1,7 +1,16 @@
 import { useState, useMemo } from 'react'
 import style from './RightOrderExerciseExecution.module.scss'
 // prettier-ignore
-import {    DndContext,    closestCenter,    useSensors,    useSensor,    PointerSensor,    KeyboardSensor,    TouchSensor} from '@dnd-kit/core'
+import {
+    DndContext,
+    closestCenter,
+    useSensors,
+    useSensor,
+    PointerSensor,
+    KeyboardSensor,
+    TouchSensor,
+    DragEndEvent
+} from '@dnd-kit/core'
 // prettier-ignore
 import {SortableContext, arrayMove, sortableKeyboardCoordinates, horizontalListSortingStrategy} from '@dnd-kit/sortable'
 import { SortableItem } from '@features/RightOrderExerciseExecution/components/SortableItem'
@@ -16,14 +25,13 @@ export default function OrderExerciseExecution({ exercise }: Props) {
 
     const [solution, setSolution] = useState(orderExercise.exercise)
 
-    // @ts-ignore
-    function handleDragEnd(event) {
+    function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event
 
         if (active.id !== over?.id) {
             setSolution((items) => {
-                const oldIndex = items.indexOf(active.id)
-                const newIndex = items.indexOf(over.id)
+                const oldIndex = items.indexOf(active.id as string)
+                const newIndex = items.indexOf(over?.id as string)
 
                 return arrayMove(items, oldIndex, newIndex)
             })
@@ -50,7 +58,7 @@ export default function OrderExerciseExecution({ exercise }: Props) {
                 <SortableContext items={solution} strategy={horizontalListSortingStrategy}>
                     <p className={style.sentence}>
                         {solution.map((part) => (
-                            <SortableItem key={part} part={part} />
+                            <SortableItem key={part} part={part} capitalized={false}/>
                         ))}
                     </p>
                 </SortableContext>

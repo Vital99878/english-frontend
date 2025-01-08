@@ -1,4 +1,4 @@
-import {useRef, useState, useEffect} from 'react'
+import {useRef, useState, useEffect, FormEvent} from 'react'
 import {BehaviorSubject} from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
 import {IExercise} from '@models/IExercise'
@@ -26,7 +26,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
         }
     }
 
-    function checkSolution(evt: SubmitEvent) {
+    function checkSolution(evt: FormEvent) {
         evt.preventDefault()
 
         if (exerciseService.keys.length !== solution.current.length || solution.current.includes(undefined)) {

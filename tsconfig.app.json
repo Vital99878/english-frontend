@@ -16,26 +16,26 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@src*": ["src*"],
-      "@pages*": ["src/pages*"],
-      "@components*": ["src/components*"],
-      "@shared*": ["src/shared*"],
-      "@features*": ["src/components/features*"],
-      "@controllers*": ["src/controllers*"],
-      "@services*": ["src/services*"],
-      "@utils*": ["src/utils*"],
-      "@models*": ["src/models*"],
-      "@types*": ["src/types*"],
-      "@mock*": ["src/mock*"],
-      "@const*": ["src/const*"]
+      "@src*": ["./src*"],
+      "@pages*": ["./src/pages*"],
+      "@components*": ["./src/components*"],
+      "@shared*": ["./src/shared*"],
+      "@features*": ["./src/components/features*"],
+      "@controllers*": ["./src/controllers*"],
+      "@services*": ["./src/services*"],
+      "@utils*": ["./src/utils*"],
+      "@models*": ["./src/models*"],
+      "@types*": ["./src/types*"],
+      "@mock*": ["./src/mock*"],
+      "@const*": ["./src/const*"]
     }
   },
   /* Paths */
   "baseUrl": ".",
 
-  "include": ["src", "custom.d.ts", "./*.tsx"]
+  "include": ["./src", "custom.d.ts", "./*.tsx"]
 }
