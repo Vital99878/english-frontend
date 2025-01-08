@@ -1,0 +1,25 @@
+.sentence {
+    font-size: 1.4rem;
+    gap: 0 0.4em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.correct:after {
+    content: '✓';
+    display: inline-block;
+    margin-left: 8px;
+    color: #28a745;
+    transition: color ease-in-out;
+}
+.incorrect:after {
+    content: '✓';
+    display: inline-block;
+    margin-left: 8px;
+    color: red;
+    transition: color ease-in-out;
+}
+
+.sentence > *:last-child {
+    margin-left: -0.4em;
+}

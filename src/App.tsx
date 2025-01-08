@@ -1,37 +1,37 @@
-import "./App.css";
-import { QueryClient } from "@tanstack/react-query";
-import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import OmissionExercise from "./components/OmissionExercise";
-import { exercise_with_omissions } from "./const/exercise_with_omissions";
+import './App.css'
+import { QueryClient } from '@tanstack/react-query'
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ExercisePage from '@pages/ExercisePage'
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    defaultOptions: {
+        queries: {
+            gcTime: 1000 * 60 * 60 * 24, // 24 hours
+        },
     },
-  },
-});
+})
 
 const persister = createSyncStoragePersister({
-  storage: window.localStorage,
-});
+    storage: window.localStorage,
+})
 
 function App() {
-  return (
-    <PersistQueryClientProvider
-      client={queryClient}
-      persistOptions={{ persister }}
-    >
-      <div>
-        <h1>Vite + React</h1>
-        <OmissionExercise exercise={exercise_with_omissions} />
-      </div>
-
-      <ReactQueryDevtools initialIsOpen />
-    </PersistQueryClientProvider>
-  );
+    return (
+        <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
+            <Router>
+                <Routes>
+                    <Route path="/exercise/*" element={<ExercisePage />} />
+                </Routes>
+            </Router>
+            {/*<OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />*/}
+            {/*<OrderExerciseExecution exercise={EXERCISE_RIGHT_ORDER} />*/}
+            {/*<OrderExerciseListExecution exercises={EXERCISE_RIGHT_ORDER_LIST}/>*/}
+            <ReactQueryDevtools initialIsOpen />
+        </PersistQueryClientProvider>
+    )
 }
 
-export default App;
+export default App

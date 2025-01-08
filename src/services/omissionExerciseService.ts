@@ -1,4 +1,4 @@
-export default class OmissionExercise {
+export default class OmissionExerciseService {
   constructor(exercise: string) {
     this.createKeys(exercise);
     this.splitToUI(exercise);
@@ -17,8 +17,9 @@ export default class OmissionExercise {
 
   //  todo проверку пробелов, доделать createKeys для пробелов (когда правильный ответ - пробел)
   public checkAnswer(solution: string[]): boolean[] {
+    // console.log('this.keys: ', this.keys)
+    // console.log('solution: ', solution)
     const regex = /^\s*$/;
-    // return regex.test(str);
     return this.keys.reduce((acc, correctKey, currentIndex) => {
       acc[currentIndex] =
         (correctKey === ' ' && !solution[currentIndex]) ||
