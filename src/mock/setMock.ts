@@ -16,7 +16,7 @@ export type ResponsesConfig<TData> = {
 }
 
 
-function setMock<TResponse>(
+export function setMock<TResponse>(
     config: EndpointConfig,
     responsesConfig: ResponsesConfig<TResponse>
 ): void{
@@ -25,6 +25,5 @@ function setMock<TResponse>(
 
     if(enabled) {
         mockAdapter[method](endpoint).reply(createMockResponder(responsesConfig))
-
     }
 }

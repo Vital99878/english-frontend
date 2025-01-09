@@ -1,7 +1,9 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { IExercise } from '@models/IExercise'
+import { MOCK_ENABLED, mockAPI } from '@mock/config'
 
 const axiosInstance = axios.create({
+    // todo set base url in the .env
     baseURL: 'http://localhost:3000',
     headers: {
         'Content-Type': 'application/json',
@@ -19,10 +21,25 @@ const EmptyExercise: IExercise<'omissions'> = {
     level: 'a1',
 }
 
+type APIConfig = {
+    axios: AxiosInstance
+    mockAPI: AxiosInstance
+    useMock: boolean
+}
+
 class ApiService {
-    async getExercise(id: string): Promise<IExercise<'omissions'>> {
+    private axios: AxiosInstance
+
+    constructor({ axios, mockAPI, useMock }: APIConfig) {
+        if (useMock) {
+            this.axios = mockAPI
+        } else {
+            this.axios = axios
+        }
+    }
+    async getExercise(theme: string, id: string): Promise<IExercise<'omissions'>> {
         try {
-            const res = await axiosInstance.get<IExercise<'omissions'>>(`/exercise/article/${id}`)
+            const res = await this.axios.get<IExercise<'omissions'>>(`/exercise/${theme}/${id}`)
             return res.data
         } catch (e) {
             console.error(e)
@@ -31,5 +48,5 @@ class ApiService {
     }
 }
 
-const api = new ApiService()
+const api = new ApiService({ axios: axiosInstance, mockAPI: mockAPI, useMock: MOCK_ENABLED })
 export default api

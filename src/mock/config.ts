@@ -1,24 +1,23 @@
-import axios from "axios";
-import * as MockAdapter from "axios-mock-adapter";
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import articles from '@mock/sets/articles'
 
+export const MOCK_ENABLED = false
 
-const MOCK_ENABLED = false
-
-
-export const mockAPI =  axios.create({
-    baseURL: '/',
+export const mockAPI = axios.create({
+    baseURL: '/localhost',
 })
 
 export const mockAdapter = new MockAdapter(mockAPI, {
     delayResponse: 1000,
-    onNoMatch: 'passthrough'
+    onNoMatch: 'passthrough',
 })
 
-mockAdapter.onGet()
 
-
-function setMock() {}
+function turnOnMock() {
+    articles()
+}
 
 if (MOCK_ENABLED) {
-    setMock()
+    turnOnMock()
 }

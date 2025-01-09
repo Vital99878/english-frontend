@@ -10,7 +10,7 @@ export default function ExercisePage() {
     // console.log(location.pathname.split('/'))
     const { data, isFetching } = useQuery({
         queryKey: [`theme ${theme}`, `exercise number: ${exerciseNumber}`],
-        queryFn: () => api.getExercise(exerciseNumber),
+        queryFn: () => api.getExercise(theme, exerciseNumber),
     })
 
     if(!data?.data) {
