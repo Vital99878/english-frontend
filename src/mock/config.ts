@@ -2,14 +2,14 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import articles from '@mock/sets/articles'
 
-export const MOCK_ENABLED = false
+export const MOCK_ENABLED = true
 
 export const mockAPI = axios.create({
-    baseURL: '/localhost',
+    baseURL: '/',
 })
 
 export const mockAdapter = new MockAdapter(mockAPI, {
-    delayResponse: 1000,
+    delayResponse: 700,
     onNoMatch: 'passthrough',
 })
 
