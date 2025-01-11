@@ -7,7 +7,6 @@ export default function ExercisePage() {
     const location = useLocation()
     const [, ,theme, exerciseNumber] = location.pathname.split('/')
 
-    // console.log(location.pathname.split('/'))
     const { data, isFetching } = useQuery({
         queryKey: [`theme ${theme}`, `exercise number: ${exerciseNumber}`],
         queryFn: () => api.getExercise(theme, exerciseNumber),

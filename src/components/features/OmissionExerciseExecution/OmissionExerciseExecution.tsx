@@ -37,12 +37,21 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
 
             return findFirstEmptyInputAndSetFocus()
         } else {
-            setCorrectAnswerKeys(exerciseService.checkAnswer(solution.current as Array<string>))
+            const correctAnswerMap = exerciseService.checkAnswer(solution.current as Array<string>)
+            setCorrectAnswerKeys(correctAnswerMap)
             setIsSolutionChecked(true)
-            const input = document.querySelector<HTMLInputElement>('.isInCorrect')
-            if (input) {
-                input.focus()
-                input.select()
+
+            if (!correctAnswerMap.includes(false)) {
+                alertService.showMessage({
+                    msg: 'Упраженение выполнено успешно',
+                    severity: 'success',
+                })
+            } else {
+                const input = document.querySelector<HTMLInputElement>('.isInCorrect')
+                if (input) {
+                    input.focus()
+                    input.select()
+                }
             }
         }
     }
