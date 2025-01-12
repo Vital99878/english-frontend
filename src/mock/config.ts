@@ -14,11 +14,10 @@ export const mockAdapter = new MockAdapter(mockAPI, {
 })
 
 
-// async function turnOnMock() {
-//     await articles()
-// }
+async function turnOnMock() {
+    await articles()
+}
 
 if (MOCK_ENABLED) {
-    await articles()
-    // await turnOnMock()
+    turnOnMock().then(r => console.log(r))
 }
