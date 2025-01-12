@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 import { IExercise } from '@models/IExercise'
-import { MOCK_ENABLED, mockAPI } from '@mock/config'
+import { mockAPI } from '@mock/config'
 
 const axiosInstance = axios.create({
     // todo set base url in the .env
@@ -48,5 +48,5 @@ class ApiService {
     }
 }
 
-const api = new ApiService({ axios: axiosInstance, mockAPI: mockAPI, useMock: MOCK_ENABLED })
+const api = new ApiService({ axios: axiosInstance, mockAPI: mockAPI, useMock: false })
 export default api

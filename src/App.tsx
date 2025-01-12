@@ -9,7 +9,7 @@ import ExercisePage from '@pages/ExercisePage'
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: 1000 * 60 * 60 * 3,
+            // staleTime: 1000 * 60 * 60 * 3,
             gcTime: 1000 * 60 * 60 * 24, // 24 hours
         },
     },
