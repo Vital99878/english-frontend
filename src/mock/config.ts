@@ -10,14 +10,15 @@ export const mockAPI = axios.create({
 
 export const mockAdapter = new MockAdapter(mockAPI, {
     delayResponse: 700,
-    onNoMatch: 'passthrough',
+    onNoMatch: 'throwException',
 })
 
 
-function turnOnMock() {
-    articles()
-}
+// async function turnOnMock() {
+//     await articles()
+// }
 
 if (MOCK_ENABLED) {
-    turnOnMock()
+    await articles()
+    // await turnOnMock()
 }
