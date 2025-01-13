@@ -57,6 +57,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     }
 
     useEffect(() => {
+        exerciseNavigator.updateCurrentExerciseNumber()
         findFirstEmptyInputAndSetFocus()
     }, [])
 

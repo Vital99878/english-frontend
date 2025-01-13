@@ -1,4 +1,4 @@
-import { IExerciseNavigator } from '@models/IExercise'
+import {IExerciseNavigator} from '@models/IExercise'
 
 class ExerciseNavigator implements IExerciseNavigator {
     currentExercise: number
@@ -6,19 +6,14 @@ class ExerciseNavigator implements IExerciseNavigator {
     lastExercise: number
 
     constructor() {
-        const [, , theme, exerciseNumber] = location.pathname.split('/')
+        this.currentExercise = 1
+        this.firstExercise = 1
+        this.lastExercise = 3
+    }
+
+    updateCurrentExerciseNumber = () => {
+        const [, , , exerciseNumber] = location.pathname.split('/')
         this.currentExercise = Number(exerciseNumber)
-
-        switch (theme) {
-            case 'article':
-                this.firstExercise = 1
-                this.lastExercise = 3
-                break
-
-            default:
-                this.firstExercise = 1
-                this.lastExercise = 3
-        }
     }
 
     goToNext = () => {
