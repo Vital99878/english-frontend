@@ -38,7 +38,6 @@ class ApiService {
         }
     }
     async getExercise(theme: string, id: string): Promise<IExercise<'omissions'>> {
-        console.log('Запрос')
         try {
             const res = await this.axios.get<IExercise<'omissions'>>(`/exercise/${theme}/${id}`)
             return res.data
