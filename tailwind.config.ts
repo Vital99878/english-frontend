@@ -65,6 +65,11 @@ const config: Config = {
       "accent_yellow-vivid-9": "hsl(48, 100%, 88%)",
       "accent_yellow-vivid-10": "hsl(49, 100%, 96%)",
     },
+    extend: {
+      minWidth: {
+        '600': '60rem', // Добавляем пользовательский класс min-w-800
+      },
+    }
   },
   plugins: [],
 };

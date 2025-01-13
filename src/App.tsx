@@ -5,6 +5,8 @@ import {createSyncStoragePersister} from '@tanstack/query-sync-storage-persister
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import ExercisePage from '@pages/ExercisePage'
+import Layout from '@components/Layout'
+import HomePage from '@pages/HomePage'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -24,7 +26,10 @@ function App() {
         <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
             <Router>
                 <Routes>
-                    <Route path="/exercise/*" element={<ExercisePage />} />
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<HomePage />} />
+                        <Route path="exercise/*" element={<ExercisePage />} />
+                    </Route>
                 </Routes>
             </Router>
             {/*<OmissionExerciseExecution exercise={EXERCISE_WITH_OMISSIONS} />*/}
