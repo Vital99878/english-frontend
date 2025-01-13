@@ -5,7 +5,6 @@ import articles from '@mock/sets/articles'
 export const MOCK_ENABLED = true
 
 export const mockAPI = axios.create({
-    baseURL: '/',
 })
 
 export const mockAdapter = new MockAdapter(mockAPI, {
