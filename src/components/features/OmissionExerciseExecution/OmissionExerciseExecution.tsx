@@ -1,7 +1,7 @@
-import {useRef, useState, FormEvent} from 'react'
-import {BehaviorSubject} from 'rxjs'
+import { useRef, useState, FormEvent } from 'react'
+import { BehaviorSubject } from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
-import {IExercise} from '@models/IExercise'
+import { IExercise } from '@models/IExercise'
 import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
 import IconButton from '@mui/material/IconButton'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
@@ -72,7 +72,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
                         if (value === '[key]') {
                             const Input = (
                                 <AutoCompleteInput
-                                    key={index}
+                                    key={exerciseService.valueForUI.toString() + index}
                                     options={exerciseService.keys}
                                     correctAnswerKeys={correctAnswerKeys}
                                     solutionData={{ keyPlace: counter$.getValue(), solution }}
