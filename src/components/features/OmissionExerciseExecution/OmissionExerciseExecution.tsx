@@ -1,4 +1,4 @@
-import {useRef, useState, useEffect, FormEvent} from 'react'
+import {useRef, useState, FormEvent} from 'react'
 import {BehaviorSubject} from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
 import {IExercise} from '@models/IExercise'
@@ -9,6 +9,7 @@ import alertService from '@components/Layout/Messenger/alertService'
 import ExerciseHint from '@components/shared/ExerciseHint/ExerciseHint'
 import style from './OmissionExercise.module.scss'
 import exerciseNavigator from '@services/exercise-navigator'
+import OmissionExerciseNavigation from '@features/OmissionExerciseExecution/OmissionExerciseNavigation'
 
 export default function OmissionExerciseExecution(props: { exercise: IExercise<'omissions'> }) {
     const exerciseService = new OmissionExerciseService(props.exercise.data)
@@ -19,14 +20,13 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     const [isSolutionChecked, setIsSolutionChecked] = useState(false)
     const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([])
 
-    function findFirstEmptyInputAndSetFocus() {
-        const emptyInput = document.querySelector<HTMLInputElement>('input[value=""], input:not([value])')
-        if (emptyInput) {
-            emptyInput.focus()
-        }
-    }
-
     function checkSolution(evt: FormEvent) {
+        function findFirstEmptyInputAndSetFocus() {
+            const emptyInput = document.querySelector<HTMLInputElement>('input[value=""], input:not([value])')
+            if (emptyInput) {
+                emptyInput.focus()
+            }
+        }
         evt.preventDefault()
 
         if (exerciseService.keys.length !== solution.current.length || solution.current.includes(undefined)) {
@@ -59,11 +59,6 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
             }
         }
     }
-
-    useEffect(() => {
-        exerciseNavigator.updateCurrentExerciseNumber()
-        findFirstEmptyInputAndSetFocus()
-    }, [])
 
     return (
         <div className={'my-9 flex flex-col gap-5 relative max-w-3xl '}>
@@ -102,25 +97,10 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
                     Проверить
                 </button>
             </form>
-            <div className={'navigation flex justify-between'}>
-                <button
-                    className={'text-xs text-n-6'}
-                    onClick={exerciseNavigator.goToPrevious}
-                    disabled={exerciseNavigator.currentExercise === exerciseNavigator.firstExercise}
-                >
-                    Предыдущее
-                </button>
-                <button
-                    className={'text-xs text-n-6'}
-                    onClick={exerciseNavigator.goToNext}
-                    disabled={exerciseNavigator.currentExercise === exerciseNavigator.lastExercise}
-                >
-                    Следующее
-                </button>
-            </div>
+            <OmissionExerciseNavigation />
             <ExerciseHint text={props.exercise.hint} open={hintIsOpened} handleClose={() => setHintIsOpened(false)} />
             <IconButton onClick={() => setHintIsOpened((s) => !s)} className={style.openHintButton}>
-                <InfoOutlinedIcon style={ {borderRadius: '8px', fontSize: '1.6rem' }} />
+                <InfoOutlinedIcon style={{ borderRadius: '8px', fontSize: '1.6rem' }} />
             </IconButton>
         </div>
     )
