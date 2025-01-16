@@ -20,6 +20,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     const [isSolutionChecked, setIsSolutionChecked] = useState(false)
     const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([])
 
+    console.log('exerciseService.valueForUI: ', exerciseService.valueForUI)
     function checkSolution(evt: FormEvent) {
         function findFirstEmptyInputAndSetFocus() {
             const emptyInput = document.querySelector<HTMLInputElement>('input[value=""], input:not([value])')
@@ -60,6 +61,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
         }
     }
 
+
     return (
         <div className={'my-9 flex flex-col gap-5 relative max-w-3xl '}>
             <h1
@@ -85,7 +87,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
                             counter$.next(counter$.getValue() + 1)
                             return Input
                         } else {
-                            return <span key={index}>{value}</span>
+                            return <span key={index}>{createBoldNumberInString(value)}</span>
                         }
                     })}
                 </p>

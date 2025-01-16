@@ -30,8 +30,10 @@ export default class OmissionExerciseService {
   }
 
   private splitToUI(inputString: string) {
-    // Используем регулярное выражение для замены слов в скобках на "key" и одновременно разделения строки
+    // Для замены слов в скобках на "key" и одновременно разделения строки
     const regex = /(\[[^\]]+])/g;
+    console.log('split',inputString
+        .split(regex))
 
     // Убираем пустые строки
     this.valueForUI = inputString
