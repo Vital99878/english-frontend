@@ -4,7 +4,7 @@ import {Outlet, Link} from "react-router-dom";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
     return (
-        <div className="layout h-full w-full">
+        <div className="layout h-full w-full xs:px-3 md:px-6">
             <header className="header">
                 <nav className="menu flex justify-between gap-5">
                     <Link to={'/'}>Home</Link>
