@@ -24,7 +24,7 @@ export default class OmissionExerciseService {
       acc[currentIndex] =
         (correctKey === ' ' && !solution[currentIndex]) ||
         (correctKey === ' ' && regex.test(solution[currentIndex])) ||
-        correctKey === solution[currentIndex].trim();
+        correctKey.toLowerCase() === solution[currentIndex].trim().toLowerCase();
       return acc;
     }, [] as boolean[]);
   }

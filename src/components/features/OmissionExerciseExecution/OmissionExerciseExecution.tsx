@@ -47,6 +47,10 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
                     severity: 'success',
                 })
             } else {
+                alertService.showMessage({
+                    msg: 'Упраженение выполнено c ошибками',
+                    severity: 'warning',
+                })
                 const input = document.querySelector<HTMLInputElement>('.isInCorrect')
                 if (input) {
                     input.focus()
