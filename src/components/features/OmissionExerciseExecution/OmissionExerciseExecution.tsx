@@ -66,13 +66,13 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     }, [])
 
     return (
-        <div className={'my-9 flex flex-col gap-5 relative'} style={{ maxWidth: '80ch' }}>
+        <div className={'my-9 flex flex-col gap-5 relative max-w-3xl '}>
             <h1
                 className={'text-2xl'}
             >{`${props.exercise.theme.toUpperCase()}. Упражнение N ${exerciseNavigator.currentExercise}`}</h1>
             <p>{props.exercise.task}</p>
             <form onSubmit={checkSolution}>
-                <p className={'exercise text-n-6'}>
+                <p className={'exercise text-n-6 xs:text-2xl sm:text-xl'}>
                     {exerciseService.valueForUI.map((value, index) => {
                         if (value === '[key]') {
                             const Input = (
@@ -120,7 +120,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
             </div>
             <ExerciseHint text={props.exercise.hint} open={hintIsOpened} handleClose={() => setHintIsOpened(false)} />
             <IconButton onClick={() => setHintIsOpened((s) => !s)} className={style.openHintButton}>
-                <InfoOutlinedIcon style={{ backgroundColor: 'lightblue', borderRadius: '8px' }} />
+                <InfoOutlinedIcon style={ {borderRadius: '8px', fontSize: '1.6rem' }} />
             </IconButton>
         </div>
     )

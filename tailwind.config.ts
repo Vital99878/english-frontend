@@ -69,6 +69,9 @@ const config: Config = {
       minWidth: {
         '600': '60rem', // Добавляем пользовательский класс min-w-800
       },
+      screens: {
+        xs: '320px'
+      }
     }
   },
   plugins: [],

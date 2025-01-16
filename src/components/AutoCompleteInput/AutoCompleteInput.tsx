@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, useRef, MutableRefObject, ComponentProps, FocusEvent } from 'react'
 import useCalcWidthAndSpace from '@components/AutoCompleteInput/useCalcWidthAndSpace'
 import clsx from 'clsx'
-import { Input } from './OmissionInput'
+import { AnswerInput } from './OmissionInput'
 
 type Props = {
     options: string[]
@@ -50,19 +50,19 @@ export default function AutoCompleteInput({
     return (
         <>
             {space.hasSpaceBefore && <span> </span>}
-            <Input
+            <AnswerInput
                 correct={isCorrect && isCorrect !== isInCorrect}
                 incorrect={isInCorrect && isCorrect !== isInCorrect}
                 {...inputProps}
                 autoFocus={!inputValue.length}
                 ref={inputRef}
                 style={{
-                    width: !inputValue ? '1.2rem' : width,
+                    width: !inputValue ? '1.2rem' : width
                 }}
                 type="text"
                 value={inputValue}
                 onChange={handleChange}
-                className={clsx('text-n-5', isInCorrect && 'isInCorrect')}
+                className={clsx('text-n-6 xs:text-2xl sm:text-xl', isInCorrect && 'isInCorrect')}
                 placeholder="..."
                 tabIndex={getTabIndex(inputValue)}
                 onBlur={handleOnBlur}
