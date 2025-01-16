@@ -1,7 +1,7 @@
-import { useRef, useState, FormEvent } from 'react'
-import { BehaviorSubject } from 'rxjs'
+import {useRef, useState, FormEvent} from 'react'
+import {BehaviorSubject} from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
-import { IExercise } from '@models/IExercise'
+import {IExercise} from '@models/IExercise'
 import AutoCompleteInput from '../../AutoCompleteInput/AutoCompleteInput'
 import IconButton from '@mui/material/IconButton'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
@@ -20,7 +20,6 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
     const [isSolutionChecked, setIsSolutionChecked] = useState(false)
     const [correctAnswerKeys, setCorrectAnswerKeys] = useState<Array<boolean>>([])
 
-    console.log('exerciseService.valueForUI: ', exerciseService.valueForUI)
     function checkSolution(evt: FormEvent) {
         function findFirstEmptyInputAndSetFocus() {
             const emptyInput = document.querySelector<HTMLInputElement>('input[value=""], input:not([value])')
@@ -61,6 +60,17 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
         }
     }
 
+    function createBoldNumberInString(str: string) {
+        // Разбиваем строку по числам с точками, добавляем их в тег <strong>
+        const parts = str.split(/(\d+\.)/) // Разделяем строку на числа с точкой и остальные части
+        return parts.map((part, index) => {
+            // Если это число с точкой, то оборачиваем его в <strong>
+            if (/^\d+\.$/.test(part)) {
+                return <strong key={index}>{part}</strong>
+            }
+            return part // Если не число с точкой, просто возвращаем текст
+        })
+    }
 
     return (
         <div className={'my-9 flex flex-col gap-5 relative max-w-3xl '}>
