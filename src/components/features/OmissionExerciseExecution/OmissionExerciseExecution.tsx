@@ -73,7 +73,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
 
     useEffect(() => {
         function toggleHint(evt: KeyboardEvent) {
-            if ((evt.altKey && evt.key.toLowerCase() === 'l') || evt.key.toLowerCase() === 'д') {
+            if ((evt.ctrlKey && evt.key.toLowerCase() === 'h') || evt.key.toLowerCase() === 'р') {
                 setHintIsOpened((s) => !s)
             }
             evt.preventDefault()
