@@ -8,7 +8,6 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import alertService from '@components/Layout/Messenger/alertService'
 import ExerciseHint from '@components/shared/ExerciseHint/ExerciseHint'
 import style from './OmissionExercise.module.scss'
-import exerciseNavigator from '@services/exercise-navigator'
 import OmissionExerciseNavigation from '@features/OmissionExerciseExecution/OmissionExerciseNavigation'
 
 export default function OmissionExerciseExecution(props: { exercise: IExercise<'omissions'> }) {
@@ -76,7 +75,7 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
         <div className={'my-9 flex flex-col gap-5 relative max-w-3xl '}>
             <h1
                 className={'text-2xl'}
-            >{`${props.exercise.theme.toUpperCase()}. Упражнение N ${exerciseNavigator.currentExercise}`}</h1>
+            >{`${props.exercise.theme.toUpperCase()}. Упражнение N ${Number(location.pathname.split('/')[3])}`}</h1>
             <p>{props.exercise.task}</p>
             <form onSubmit={checkSolution}>
                 <p className={'exercise text-n-6 xs:text-2xl sm:text-xl'}>

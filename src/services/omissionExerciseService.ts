@@ -1,51 +1,45 @@
 export default class OmissionExerciseService {
-  constructor(exercise: string) {
-    this.createKeys(exercise);
-    this.splitToUI(exercise);
-  }
-
-  private createKeys(text: string) {
-    let match;
-    const regex = /\[(.*?)]/g;
-    while ((match = regex.exec(text)) !== null) {
-      this.keys.push(match[1]);
+    constructor(exercise: string) {
+        this.createKeys(exercise)
+        this.splitToUI(exercise)
     }
-  }
 
-  public valueForUI: string[] = [];
-  public keys: string[] = [];
+    private createKeys(text: string) {
+        let match
+        const regex = /\[(.*?)]/g
+        while ((match = regex.exec(text)) !== null) {
+            this.keys.push(match[1])
+        }
+    }
 
-  //  todo проверку пробелов, доделать createKeys для пробелов (когда правильный ответ - пробел)
-  public checkAnswer(solution: string[]): boolean[] {
-    // console.log('this.keys: ', this.keys)
-    // console.log('solution: ', solution)
-    const regex = /^\s*$/;
-    return this.keys.reduce((acc, correctKey, currentIndex) => {
-      acc[currentIndex] =
-        (correctKey === ' ' && !solution[currentIndex]) ||
-        (correctKey === ' ' && regex.test(solution[currentIndex])) ||
-        correctKey.toLowerCase() === solution[currentIndex].trim().toLowerCase();
-      return acc;
-    }, [] as boolean[]);
-  }
+    public valueForUI: string[] = []
+    public keys: string[] = []
 
-  private splitToUI(inputString: string) {
-    // Для замены слов в скобках на "key" и одновременно разделения строки
-    const regex = /(\[[^\]]+])/g;
-    console.log('split',inputString
-        .split(regex))
+    //  todo проверку пробелов, доделать createKeys для пробелов (когда правильный ответ - пробел)
+    public checkAnswer(solution: string[]): boolean[] {
+        // console.log('this.keys: ', this.keys)
+        // console.log('solution: ', solution)
+        const regex = /^\s*$/
+        return this.keys.reduce((acc, correctKey, currentIndex) => {
+            acc[currentIndex] =
+                (correctKey === ' ' && !solution[currentIndex]) ||
+                (correctKey === ' ' && regex.test(solution[currentIndex])) ||
+                correctKey.toLowerCase() === solution[currentIndex].trim().toLowerCase()
+            return acc
+        }, [] as boolean[])
+    }
 
-    // Убираем пустые строки
-    this.valueForUI = inputString
-      .split(regex)
-      .map((part) => {
-        // Заменяем слова в квадратных скобках на "key"
-        return part.trim() === ''
-          ? ''
-          : part.match(regex)
-            ? '[key]'
-            : part.trim();
-      })
-      .filter((part) => part);
-  }
+    private splitToUI(inputString: string) {
+        // Для замены слов в скобках на "key" и одновременно разделения строки
+        const regex = /(\[[^\]]+])/g
+
+        // Убираем пустые строки
+        this.valueForUI = inputString
+            .split(regex)
+            .map((part) => {
+                // Заменяем слова в квадратных скобках на "key"
+                return part.trim() === '' ? '' : part.match(regex) ? '[key]' : part.trim()
+            })
+            .filter((part) => part)
+    }
 }

@@ -8,7 +8,7 @@ class ExerciseNavigator implements IExerciseNavigator {
     constructor() {
         this.currentExercise = 1
         this.firstExercise = 1
-        this.lastExercise = 3
+        this.lastExercise = 10
     }
 
     updateCurrentExerciseNumber = () => {
