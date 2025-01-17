@@ -1,4 +1,4 @@
-import {useRef, useState, FormEvent} from 'react'
+import {useRef, useState, FormEvent, useEffect} from 'react'
 import {BehaviorSubject} from 'rxjs'
 import OmissionExerciseService from '@services/omissionExerciseService'
 import {IExercise} from '@models/IExercise'
@@ -70,6 +70,18 @@ export default function OmissionExerciseExecution(props: { exercise: IExercise<'
             return part // Если не число с точкой, просто возвращаем текст
         })
     }
+
+    useEffect(() => {
+        function toggleHint(evt: KeyboardEvent) {
+            if ((evt.altKey && evt.key.toLowerCase() === 'l') || evt.key.toLowerCase() === 'д') {
+                setHintIsOpened((s) => !s)
+            }
+            evt.preventDefault()
+        }
+        document.addEventListener('keydown', toggleHint)
+
+        return () => document.removeEventListener('keydown', toggleHint)
+    }, [])
 
     return (
         <div className={'my-9 flex flex-col gap-5 relative max-w-3xl '}>
